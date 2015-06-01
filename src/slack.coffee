@@ -8,6 +8,7 @@ Util = require 'util'
 class SlackBot extends Adapter
   @MAX_MESSAGE_LENGTH: 4000
   @MIN_MESSAGE_LENGTH: 1
+  @SEND_RAW_MESSAGES: process.env.HUBOT_SLACK_SEND_RAW_MESSAGES
 
   constructor: (robot) ->
     @robot = robot
@@ -206,7 +207,10 @@ class SlackBot extends Adapter
       @robot.logger.debug "Sending to #{envelope.room}: #{msg}"
 
       if msg.length <= SlackBot.MAX_MESSAGE_LENGTH
-        channel.send msg
+        if SlackBot.SEND_RAW_MESSAGES:
+          channel.sendRaw msg
+        else:
+          channel.send msg
 
       # If message is greater than MAX_MESSAGE_LENGTH, split it into multiple messages
       else
@@ -238,7 +242,10 @@ class SlackBot extends Adapter
 
             msg = msg.substring(breakIndex, msg.length)
 
-        channel.send m for m in submessages
+        if SlackBot.SEND_RAW_MESSAGES:
+          channel.sendRaw m for m in submessages
+        else:
+          channel.send m for m in submessages
 
   reply: (envelope, messages...) ->
     @robot.logger.debug "Sending reply"

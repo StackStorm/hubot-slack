@@ -16,6 +16,12 @@ This is a [Hubot](http://hubot.github.com/) adapter to use with [Slack](https://
 - Initialize git and make your initial commit
 - Check out the [hubot docs](https://github.com/github/hubot/tree/master/docs) for further guidance on how to build your bot
 
+### Environment variable options
+
+- `HUBOT_SLACK_TOKEN` - Your slack token.
+- `HUBOT_SLACK_SEND_RAW_MESSAGES` - If set, no automatic parsing and formatting will be applied on the message and they will
+  displayed raw on Slack.
+
 #### Testing your bot locally
 
 - `HUBOT_SLACK_TOKEN=xoxb-1234-5678-91011-00e4dd ./bin/hubot --adapter slack`
