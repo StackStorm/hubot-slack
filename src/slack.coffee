@@ -8,7 +8,7 @@ Util = require 'util'
 class SlackBot extends Adapter
   @MAX_MESSAGE_LENGTH: 4000
   @MIN_MESSAGE_LENGTH: 1
-  @SEND_RAW_MESSAGES: process.env.HUBOT_SLACK_SEND_RAW_MESSAGES
+  @SEND_RAW_MESSAGES: true
 
   constructor: (robot) ->
     @robot = robot
